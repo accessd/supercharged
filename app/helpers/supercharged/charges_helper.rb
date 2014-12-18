@@ -11,8 +11,9 @@ module Supercharged::ChargesHelper
     options = with_default_html_options(options)
 
     account = options.delete(:account)
+    order_id = options.delete(:order_id)
 
-    payment_service_for(FAKE_ORDER_ID, account, options) do |service|
+    payment_service_for(order_id || FAKE_ORDER_ID, account, options) do |service|
       service.notify_url gateways_result_url(service_name)
       service.return_url root_url
       service.cancel_return_url new_charge_url
