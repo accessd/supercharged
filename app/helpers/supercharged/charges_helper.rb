@@ -15,7 +15,7 @@ module Supercharged::ChargesHelper
 
     payment_service_for(order_id || FAKE_ORDER_ID, account, options) do |service|
       service.notify_url gateways_result_url(service_name)
-      service.return_url root_url
+      service.return_url options[:return_url] || root_url
       service.cancel_return_url new_charge_url
       block.call(service)
     end
